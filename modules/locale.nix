@@ -21,7 +21,7 @@
   };
 
   services.xserver.xkb = {
-    layout = "cz,us";
+    layout = "us,cz";
     variant = "";
   };
 }
