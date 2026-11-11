@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-
+{ ... }:
 {
   time.timeZone = "Europe/Prague";
-  networking.hostName = "nixos";
 
   i18n = {
     defaultLocale = "cs_CZ.UTF-8";
-    
+
     extraLocaleSettings = {
       LC_ADDRESS = "cs_CZ.UTF-8";
       LC_IDENTIFICATION = "cs_CZ.UTF-8";

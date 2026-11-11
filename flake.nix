@@ -1,5 +1,5 @@
 {
-  description = "<3";
+  description = "Minunsh NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -10,39 +10,35 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations = {
+  outputs = { nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
 
-      # Desktop
-      desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/desktop/configuration.nix
+      mkHost = { configuration, homeConfiguration }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            configuration
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.minunsh = import homeConfiguration;
+            }
+          ];
+        };
+    in
+    {
+      nixosConfigurations = {
+        desktop = mkHost {
+          configuration = ./hosts/desktop/configuration.nix;
+          homeConfiguration = ./hosts/desktop/home.nix;
+        };
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users."minunsh" = import ./hosts/desktop/home.nix;
-          }
-        ];
+        laptop = mkHost {
+          configuration = ./hosts/laptop/configuration.nix;
+          homeConfiguration = ./hosts/laptop/home.nix;
+        };
       };
-
-      # Laptop
-      laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/laptop/configuration.nix
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users."minunsh" = import ./hosts/laptop/home.nix;
-          }
-        ];
-      };
-
     };
-  };
 }

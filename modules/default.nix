@@ -1,5 +1,4 @@
 { ... }:
-
 {
   imports = [
     ./networking.nix
@@ -11,4 +10,4 @@
     ./packages.nix
     ./nix.nix
   ];
-}   
+}

@@ -1,5 +1,4 @@
-{ pkgs, ... }: 
-
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     wget
@@ -12,11 +11,6 @@
     traceroute
     tree
   ];
-}   
 
-
-
-
-
-
-
+  services.flatpak.enable = true;
+}

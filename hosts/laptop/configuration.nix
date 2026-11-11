@@ -1,13 +1,12 @@
-{ config, pkgs, lib, ... }: {
-
+{ ... }:
+{
   imports = [
-    # until nixos-generate-config on laptop
-    # ./hardware-configuration.nix  
-    
+    ./hardware-configuration.nix
     ../../modules
     ../../users.nix
   ];
 
+  networking.hostName = "laptop";
+
   system.stateVersion = "26.05";
-  nixpkgs.config.allowUnfree = true;
 }

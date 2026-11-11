@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-
+{ pkgs, ... }:
 {
   home.username = "minunsh";
   home.homeDirectory = "/home/minunsh";
@@ -9,6 +8,7 @@
 
   home.packages = with pkgs; [
     # Browsers
+    prismlauncher
     brave
     firefox
 
@@ -18,21 +18,24 @@
 
     # Games
     steam
-    heroic
-    prismlauncher
-    mindustry
     cubiomes-viewer
     xclicker
     pear-desktop
+    heroic
 
     # Dev
     vscode
-    godot_4
+    godot-mono
     github-cli
     git
+    github-desktop
     vim
+    python311
 
     # Misc
     kdePackages.kate
+    aria2
+    cpu-x
+    openrgb
   ];
-}   
+}

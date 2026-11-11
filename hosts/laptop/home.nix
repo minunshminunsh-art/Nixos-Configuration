@@ -1,6 +1,4 @@
-  GNU nano 9.2                                         home.nix                                                    
-{ config, pkgs, ... }:
-
+{ pkgs, ... }:
 {
   home.username = "minunsh";
   home.homeDirectory = "/home/minunsh";
@@ -23,7 +21,7 @@
     prismlauncher
     pear-desktop
 
-    # Dev
+    # Development
     vscode
     godot_4
     github-cli
